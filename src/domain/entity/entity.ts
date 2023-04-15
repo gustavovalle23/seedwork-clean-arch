@@ -1,11 +1,14 @@
 import { UniqueEntityId } from '../value-objects';
+import { Validatable } from './updater';
 
-export abstract class Entity<Props = any> {
+export abstract class Entity<Props = any> implements Validatable {
   public readonly uniqueEntityId: UniqueEntityId;
 
   constructor(public readonly props: Props, id?: UniqueEntityId) {
     this.uniqueEntityId = id || new UniqueEntityId();
   }
+
+  abstract validate(): void;
 
   get id(): string {
     return this.uniqueEntityId.value;
