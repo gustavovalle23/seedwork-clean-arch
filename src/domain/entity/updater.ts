@@ -1,4 +1,4 @@
-interface Validatable {
+export interface Validatable {
   validate(): void;
 }
 
