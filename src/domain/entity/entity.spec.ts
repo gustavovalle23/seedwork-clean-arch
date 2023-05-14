@@ -1,9 +1,13 @@
-import { ObjectID } from 'bson';
+import { ObjectId } from 'bson';
 
 import { UniqueEntityId } from '../value-objects';
 import { Entity } from './entity';
 
-class StubEntity extends Entity<{ prop1: string; prop2: number }> {}
+class StubEntity extends Entity<{ prop1: string; prop2: number }> {
+  validate(): void {
+    throw new Error('Method not implemented.');
+  }
+}
 
 describe('Entity Unit Tests', () => {
   it('should set props and id', () => {
@@ -11,7 +15,7 @@ describe('Entity Unit Tests', () => {
     const entity = new StubEntity(arrange);
     expect(entity.props).toStrictEqual(arrange);
     expect(entity.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
-    expect(ObjectID.isValid(entity.id)).toBeTruthy();
+    expect(ObjectId.isValid(entity.id)).toBeTruthy();
   });
 
   it('should accept a valid uuid', () => {
